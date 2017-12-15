@@ -1,0 +1,93 @@
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content};
+  :-moz-placeholder           {@content};
+  ::-moz-placeholder          {@content};
+  :-ms-input-placeholder      {@content};  
+}
+
+@mixin bg($image){
+    background-image: url($image);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+
+@mixin ta-justify($child){
+  width: 100%;
+  text-align: justify;
+  /* Обнуляем для родителя*/
+  line-height: 0;
+  font-size: 1px; /* 1px для Opera */
+  /* Лекарство для IE6-7*/
+  text-justify: newspaper;
+  zoom:1;
+  /* Включаем в работу последнюю строку*/   
+  text-align-last: justify;
+  &:after {
+    width: 100%; 
+    height: 0px;
+    visibility: hidden;
+    overflow: hidden;
+    content: '';
+    display: inline-block;
+  }
+  & > #{$child} {
+    display: inline-block;
+    text-align: left;
+    text-align-last: left;
+    /* Востанавливаем у потомков, кроме последнего*/
+    line-height: normal;
+    font-size: 16px;
+    
+    /* Без него в Opera будет отступ под элементами */
+    vertical-align: top; 
+    
+    /* эмуляция inline-block для IE6-7*/
+    //display : inline;
+    //zoom : 1;
+  }
+}
+
+@mixin size($width, $height:false) {
+    display: block;
+    width: $width + px;
+    @if $height {
+        height: $height + px;
+    }@else{
+        height: $width + px;
+    }
+}
+
+@mixin space($val, $position:'left'){
+  @if($position == 'top'){
+    margin-top: $val+px;
+    &:first-child{
+      margin-top: 0;
+    }
+  }
+  @if($position == 'bottom'){
+    margin-bottom: $val+px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+  @if($position == 'left'){
+    margin-left: $val+px;
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+  @if($position == 'right'){
+    margin-right: $val+px;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+@function rem($val){
+  @return $val/$bodyfont+rem;
+}
+@function em($val){
+  @return $val/$bodyfont+em;
+}

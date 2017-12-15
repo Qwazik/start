@@ -1,0 +1,20 @@
+include _config.jade
+doctype html
+html(lang='ru')
+	include includes/head
+	body
+		<!--[if lt IE 9]>
+		p.browserupgrade
+			|Ваш браузер  
+			strong устарел
+			| . Пожалуйста 
+			a(href='http://browsehappy.com/') обновите ваш браузер
+			|  для корректного отображения сайтов.
+		<![endif]-->
+		.page
+			include includes/header
+			block main
+			include includes/footer
+		//scripts =================================================
+		include includes/scripts
+   
