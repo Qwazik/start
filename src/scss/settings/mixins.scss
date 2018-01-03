@@ -88,6 +88,14 @@
 @function rem($val){
   @return $val/$bodyfont+rem;
 }
-@function em($val){
-  @return $val/$bodyfont+em;
+@function em($val,$fz){
+  @return $val/$fz+em;
+}
+@function vw($val){
+  $windowSize: 320;
+  $vw: $windowSize / 100;
+  @return ($val / $vw) * 1vw;
+}
+@function lh($val){
+  @return $val/$fz;
 }
