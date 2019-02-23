@@ -1,0 +1,23 @@
+{
+  "name": "start bitrix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd html && yarn start",
+    "end": "git add . && git commit -m 'autodeploy' && git push -u origin master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qwazik/kibteh.git"
+  },
+  "author": "Qwazik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Qwazik/kibteh/issues"
+  },
+  "homepage": "https://github.com/Qwazik/kibteh#readme",
+  "devDependencies": {
+    
+  }
+}
