@@ -1,97 +1,159 @@
-var clear = (e) => console.clear();
-var log = message => console.log(message);
-
+var TABS_SLIDERS = [];
 $(function () {
-    $('.home-search .input-date').datepicker({
+    //init fancybox
+    $('.fancybox').fancybox();
+    //init tabs
+    (function(){
+        var tabsGlobalSettings = {
+            afterClick: function(tabs){
+                var sep = $(tabs.$el).find('[class*="__sep"]');
+                var active = $(tabs.$el).find('[class*="__item"]').filter('[class*="_active"]');
+                var paddingLeft = parseInt(active.css('padding-left'));
+                sep.width(active.innerWidth() - paddingLeft*2).css({
+                    position: 'absolute',
+                    left: paddingLeft + active.position().left
+                });
+            }
+        };
+        var tabsPersonalSettings = {
+            'place-header':{
+                $thisContent: $('.place-content'),
+                contentActiveClass: $('.place-content').data('tabs-active')
+            }
+        }
+        $('[data-tabs]').each(function(){
+            $(this).q('tabs', $.extend(tabsGlobalSettings, tabsPersonalSettings[$(this).data('tabs')]));
+        });
+    }());
+    //init tabs
+    
+    //datepicker init
+    $('.input-date').datepicker({
         range: true,
         autoClose: true,
         multipleDatesSeparator: ' - ',
         dateFormat: 'dd.M'
     });
+    //datepicker init
 
-    var TABS_SLIDERS = [];
-    var slidersProps = {
-        'place': {
-            spaceBetween: 0
-        }
-    };
-    $('[data-swiper-container]').each(function () {
-        var $this = $(this),
-            wrapper = $this.find('[data-swiper-wrapper]'),
-            slide = $this.find('[data-swiper-slide]'),
-            pagination = $this.find('[data-swiper-pagination]'),
-            items = $this.data('swiper-items'),
-            sliderName = $this.data('swiper-container'),
-            bulletClass = pagination.data('pagination-class'),
-            bulletClassActive = pagination.data('pagination-active'),
-            nextEl = $this.find('[data-next]'),
-            prevEl = $this.find('[data-prev]'),
-            swiper = null,
-            sliderProps = slidersProps[sliderName],
-            defaultProps = {
-                spaceBetween: 10,
-                slidesPerView: items,
-                pagination: {
-                    el: pagination,
-                    bulletActiveClass: bulletClassActive,
-                    bulletClass: bulletClass,
-                    clickable: true
-                },
-                navigation: {
-                    nextEl: nextEl,
-                    prevEl: prevEl,
-                    disabledClass: 'disabled'
+    //init sliders
+    (function(){
+        var slidersProps = {
+            'place': {
+                props: {
+                    spaceBetween: 0,
+                    breakpoints: {
+                        991: {
+                            slidesPerView: 3
+                        }
+                    }
                 }
             },
-            props = $.extend(defaultProps, sliderProps);
-        if (slide.length > items) {
-            sliderInit();
-            swiper = new Swiper($this, props);
-            TABS_SLIDERS.push(swiper);
-        }
-        if ($this.closest('.slider-nav-wrapper').length || $this.is('[data-nav-container]')) {
-            var navWrapper = $this.closest('.slider-nav-wrapper') || $this.is('[data-nav-container]');
-            $(navWrapper).find('.slider-nav').show();
-            $(navWrapper).find('[data-prev]').click(function () {
-                swiper.slidePrev();
-                console.log('init')
-            })
-            $(navWrapper).find('[data-next]').click(function () {
-                swiper.slideNext();
-                console.log('init')
-            })
-        }
-
-        function sliderInit() {
-            clearClassNames([
-                wrapper, slide
-            ]);
-            $this.addClass('swiper-container');
-            wrapper.addClass('swiper-wrapper');
-            slide.addClass('swiper-slide');
-            pagination.show();
-            wrapper.removeClass('row');
-            slide.removeClass('col-3');
-        }
-
-        function clearClassNames(elements) {
-            var removedClasses = [
-                /row/,
-                /col(?:-\w{2})?(?:-\d)?/
-            ];
-            elements.forEach(function (el) {
-                removedClasses.forEach(function(pattern){
-                    var reg = new RegExp(pattern);
-                    var elClasses = el.attr('class');
-                    var removedClass = false;
-                    removedClass = reg.exec(elClasses)
-                    if(removedClass){
-                        el.removeClass(removedClass[0])
+            'special': {
+                props: {
+                    breakpoints:{
+                        991: {
+                            slidesPerView: 2
+    
+                        }
                     }
+                },
+                callbacks: function(swiper){
+                    console.log('callbacks initialize')
+                    $(window).resize(function(){
+                        var ww = $(window).innerWidth();
+                        if(ww <= 991){
+                            swiper.destroy();
+                        }
+                    });
+                }
+            },
+            'thumbnails': {
+                props: {
+                    spaceBetween: 3
+                }
+            }
+        };
+        $('[data-swiper-container]').each(function () {
+            var $this = $(this),
+                wrapper = $this.find('[data-swiper-wrapper]'),
+                slide = $this.find('[data-swiper-slide]'),
+                pagination = $this.find('[data-swiper-pagination]'),
+                items = $this.data('swiper-items'),
+                sliderName = $this.data('swiper-container'),
+                bulletClass = pagination.data('pagination-class'),
+                bulletClassActive = pagination.data('pagination-active'),
+                nextEl = $this.find('[data-next]'),
+                prevEl = $this.find('[data-prev]'),
+                swiper = null,
+                spaceBetween = $(this).data('swiper-margin') || 10,
+                sliderProps = slidersProps[sliderName] || {props:{}},
+                defaultProps = {
+                    spaceBetween: spaceBetween ,
+                    slidesPerView: items,
+                    pagination: {
+                        el: pagination,
+                        bulletActiveClass: bulletClassActive,
+                        bulletClass: bulletClass,
+                        clickable: true
+                    },
+                    navigation: {
+                        nextEl: nextEl,
+                        prevEl: prevEl,
+                        disabledClass: 'disabled'
+                    }
+                },
+                props = $.extend(defaultProps, sliderProps);
+            if (slide.length > items) {
+                sliderInit();
+                swiper = new Swiper($this, props);
+                if(sliderProps.hasOwnProperty('callbacks')) sliderProps.callbacks(swiper);
+                TABS_SLIDERS.push(swiper);
+            }
+            if ($this.closest('.slider-nav-wrapper').length || $this.is('[data-nav-container]')) {
+                var navWrapper = $this.closest('.slider-nav-wrapper') || $this.is('[data-nav-container]');
+                console.log(navWrapper[0])
+                $(navWrapper).find('.slider-nav').show();
+                $(navWrapper).find('[data-prev]').click(function () {
+                    swiper.slidePrev();
                 })
-            });
-        }
-    });
+                $(navWrapper).find('[data-next]').click(function () {
+                    swiper.slideNext();
+                })
+            }
+    
+            function sliderInit() {
+                clearClassNames([
+                    wrapper, slide
+                ]);
+                $this.addClass('swiper-container');
+                wrapper.addClass('swiper-wrapper');
+                slide.addClass('swiper-slide');
+                pagination.show();
+                wrapper.removeClass('row');
+                slide.removeClass('col-3');
+            }
+    
+            function clearClassNames(elements) {
+                var removedClasses = [
+                    /row/,
+                    /col(?:-\w{2})?(?:-\d)?/
+                ];
+                elements.forEach(function (el) {
+                    removedClasses.forEach(function(pattern){
+                        var reg = new RegExp(pattern);
+                        var elClasses = el.attr('class');
+                        var removedClass = false;
+                        removedClass = reg.exec(elClasses)
+                        if(removedClass){
+                            el.removeClass(removedClass[0])
+                        }
+                    })
+                });
+            }
+        });
+    }());
+    //init sliders
 
     /* feedback form toggler */
     (function(){
@@ -103,12 +165,13 @@ $(function () {
                 input.hide();
                 input.filter('[type="'+this.value+'"]').show();
             }).eq(0).change();
-            
     }());
+
 
     //home first social
     (function(){
         var $social = $('.home-first__social');
+        if(!$social.length) return false;
         var $container = $social.closest('.home-first');
         var initialOffset = $social.offset().top;
         var elParamsInitial = getElParams($social);
@@ -175,45 +238,240 @@ $(function () {
                 actionMethods[action]();
             };
         }
+    }());    
+
+    //select init
+    (function(){
+        $('.js-select').each(function(){
+            var multi = $(this).is('[multiple]');
+            var $this = $(this);
+            var close = $this.siblings('.js-select-close');
+            var options = {
+                minimumResultsForSearch: -1
+            };
+            if($this.data('theme') === 'search'){
+                options.theme = $this.data('theme');
+                options.templateResult = templateResult;
+                if(multi){
+                    options.closeOnSelect = false;
+                }
+            };
+            var select = $this.select2(options);
+            select.on('select2:open', function(select){
+                $this = $(this);
+                selectPaddings($this);
+                $(window).scroll(function(){
+                    selectPaddings($this);
+                });
+            });
+            if($this.data('theme') === 'search'){
+                select.on('select2:select', function(e){
+                    setText($(this));
+                });
+                select.on('select2:unselect', function(e){
+                    setText($(this));
+                });
+                setText($this);
+            }
+
+            close.click(function(){
+                select.val(null).trigger('change');
+            });
+
+            function selectPaddings(that){
+                $('.select2-dropdown').css({
+                    'padding-top':0,
+                    'padding-bottom':0
+                })
+                $('.select2-dropdown--below').css('padding-top', $(that).parent().height())
+                $('.select2-dropdown--above').css('padding-bottom', $(that).parent().height())
+            }
+
+            function setText($select){
+                var items = $this.val().length;
+                var text = items+' элемент'+end(items);
+                if(items>1) $select.siblings('.select2').find('.select2-selection__rendered').text(text);
+            }
+    
+            function templateResult (state) {
+                if (!state.id) {
+                  return state.text;
+                }
+                var icon = $(state.element).data('icon');
+                icon = $('<i class="icm '+icon+'"></i>');
+                var text = state.text;
+                var check = $('<span class="select-check"></span>');
+                var $state = $('<span></span>');
+                $state.text(text);
+                $state.prepend(icon);
+                if(multi) {
+                    $state.prepend(check);
+                    $state.addClass('home-search__span');
+                } else {
+                    $state.addClass('home-search__span home-search__span_single');
+                }
+                
+                return $state;
+            };
+
+            function end(items){
+                var last = items%10;
+                if(last < 5){
+                    return 'a';
+                }else{
+                    return 'ов';
+                }
+            }
+        });
     }());
+    //select init
+
+    //faq 
+    (function(){
+        var questItem = '.faq-item',
+            $questItem = $(questItem);
+        $questItem.q('toggler', {
+            target: '.faq-item__answer',
+            condition: 'slide',
+            closest: '.faq__row',
+            openedClass: 'faq-item_active',
+            afterClick: function(el){
+                var otherItems = $(el).closest('.faq').find('.faq-item').not(el);
+                otherItems.find('.faq-item__answer').slideUp();
+                otherItems.removeClass('faq-item_active');
+            }
+        });
+
+        $('.thumbnails-slider__item').click(function(){
+            var image = $(this).data('image');
+            var main = $(this).closest('.card-preview').find('.card-preview__main');
+            main.css('background-image', 'url('+image+')');
+        });
+    }());
+    //faq 
 });
 
 
-
+//qliba
 (function () {
     $.fn.q = function (action, params) {
         var actions = {
             tabs: tabs,
             scrollto: scrollto,
-            ezselect: ezselect,
+            toggler: toggler,
             buildTree: buildTree
         };
 
         return $(this).each(function () {
             var $this = $(this);
-            return actions[action]($this, params);
+            if(actions.hasOwnProperty(action)){
+                return actions[action]($this, params);
+            }
         });
 
-        function tabs(el, params) {
-            var $el = $(el);
-            $el.each(function () {
-                var $this = $(this),
-                    $thisNav = $this.find('[data-tabs-nav]'),
-                    $thisContent = $this.find('[data-tabs-content]'),
-                    navActiveClass = $thisNav.data('tabs-active'),
-                    contentActiveClass = $thisContent.data('tabs-active');
-                $thisNav.children().click(function () {
-                    $(this).siblings().removeClass(navActiveClass);
-                    $(this).addClass(navActiveClass);
-                    $thisContent.children().removeClass(contentActiveClass);
-                    $thisContent.children().eq($(this).index()).addClass(contentActiveClass);
-                    if (isset(params.afterClick)) {
-                        params.afterClick();
+        /*
+            Переключатель
+            condition: _active || className || display || fade || slide
+            target: Элемент для переключения
+            blur: Закрытие при клике за пределами
+        */
+        function toggler(el, params){
+            var settings = {
+                condition: 'display',
+                closest: '[data-toggler-container]',
+                openedClass: 'opened',
+                afterClick: function(){}
+            }
+            settings = $.extend(settings, params);
+            var target = getTarget(),
+                condition = settings.condition,
+                action = null,
+                actions = {
+                    modifier: function(){
+                        var className = settings.target.replace(/^[\.#]/g, '');
+                        className += condition;
+                        this.className(className);
+                    },
+                    className: function(className){
+                        target.toggleClass(className || condition);
+                    },
+                    display: function(){
+                        target.stop(true, true).toggle();
+                    },
+                    fade: function(){
+                        target.stop(true, true).fadeToggle();
+                    },
+                    slide: function(){
+                        target.stop(true, true).slideToggle();
                     }
-                }).eq(0).click();
-            });
+                };
+
+                function getTarget(){
+                    if(!params) return $(el);
+                    if($(el).closest(settings.closest).length){
+                        return $(el).closest(settings.closest).find(settings.target);
+                    }else{
+                        return $(settings.target);
+                    }
+                }
+
+                el.click(function(){
+                    $(this).toggleClass(settings.openedClass);
+                    if(condition.match(/^_/)){
+                        action = 'modifier';
+                    }else{
+                        if(actions.hasOwnProperty(condition)){
+                            action = condition;
+                        }else{
+                            action = 'className';
+                        }
+                    }
+                    actions[action]();
+                    settings.afterClick(this);
+                });
+            if(settings.blur){
+                $(document).click(function(e){
+                    if(!$(e.target).closest(settings.blur).length){
+                        if(action) {
+                            actions[action]();
+                            action = null;
+                        }
+                    }
+                })
+            }
         }
 
+        /*
+            Табы
+            [data-tabs-nav]: Контейнер навигации
+                [data-tabs-active]: Класс активного элемента
+            [data-tabs-content]: Контейнер элементов контента
+                [data-tabs-active]: Класс активного элемента
+        */
+        function tabs(el, params) {
+            var settings = {};
+            settings.$el = $(el);
+            settings.$thisNav = settings.$el.find('[data-tabs-nav]');
+            settings.$thisContent = settings.$el.find('[data-tabs-content]');
+            settings.navActiveClass =  settings.$thisNav.data('tabs-active');
+            settings.contentActiveClass  = settings.$thisContent.data('tabs-active');
+            settings.afterClick = function(){}
+            settings = $.extend(settings, params);            
+            console.log(settings)
+            settings.$thisNav.find('[class*="__item"]').click(function () {
+                var index = $(this).index();
+                $(this).siblings().removeClass(settings.navActiveClass);
+                $(this).addClass(settings.navActiveClass);
+                settings.$thisContent.children().removeClass(settings.contentActiveClass);
+                settings.$thisContent.children().eq(index).addClass(settings.contentActiveClass);
+                settings.afterClick(settings);
+            }).eq(0).click();
+        }
+
+        /*
+            Плавный скролл 
+            target цель для скролла
+        */
         function scrollto(el, params) {
             var $el = $(el);
             $el.each(function () {
@@ -229,179 +487,12 @@ $(function () {
             });
         }
 
-        function ezselect(el, params) {
-            var
-                multiSelect = el.is('[multiple]') ? true : false,
-                selectValue = el.val(),
-                currentClickEvents = false,
-                select = el,
-                timeout = null,
-                timeoutDuration = 300,
-                className = el.attr('class') || '',
-                selectOptions = el.find('option'),
-                prefix = $(el).data('prefix') || 'q-select',
-                selectedOptionClass = prefix + '__option_selected',
-                disabledOptionClass = prefix + '__option_disabled',
-                classNames = {
-                    wrapper: prefix + '__wrapper',
-                    current: prefix + '__current',
-                    list: prefix + '__list',
-                    option: prefix + '__option',
-                    arrow: prefix + '__arrow',
-                },
-                selectTemplate = {
-                    container: {
-                        className: prefix + ' ' + className,
-                        children: {
-                            wrapper: {
-                                className: classNames.wrapper,
-                                children: {
-                                    current: {
-                                        className: classNames.current,
-                                        content: function () {
-                                            var arrow = $('<span/>').addClass(classNames.arrow);
-                                            var name = $('<span/>').text(getPlaceholder());
-                                            name.attr('data-name', '');
-                                            return [name, arrow]
-                                        }
-                                    },
-                                    list: {
-                                        className: classNames.list,
-                                        content: function () {
-                                            var options = [];
-                                            selectOptions.each(function () {
-                                                var $this = $(this);
-                                                var option = $('<div class="' + classNames.option + '"/>');
-                                                if ($this.is('[selected]')) option.addClass(selectedOptionClass);
-                                                if ($this.is('[disabled]')) option.addClass(disabledOptionClass);
-                                                option.data('value', $this.attr('value'));
-                                                option.text($this.text());
-                                                options.push(option);
-                                            });
-                                            return options;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                newSelect = buildTree(false, selectTemplate).insertAfter(el),
-                newSelectList = newSelect.find('.' + classNames.list),
-                newSelectCurrent = newSelect.find('.' + classNames.current);
-            newSelectOptions = newSelect.find('.' + classNames.option);
-            newSelectArrow = newSelect.find('.' + classNames.arrow);
-            watchArrow();
-            newSelectList.hide();
-            el.hide();
-
-            newSelectCurrent.click(clickCurrent);
-            newSelectOptions.click(clickOption);
-
-            $(newSelectArrow).click(function () {
-                if ($(this).is(classNames.arrow + '_remove')) {
-                    selectValue = [];
-                    newSelectCurrent.find('[data-name]').text(getPlaceholder());
-                    watchArrow();
-                }
-            });
-
-            $(newSelectList, newSelect).mouseenter(function () {
-                clearTimeout(timeout);
-            });
-
-            $(newSelectList, newSelect).mouseleave(function () {
-                timeout = setTimeout(function () {
-                    closeList();
-                }, timeoutDuration);
-            });
-
-            function openList() {
-                newSelectList.fadeIn();
-            }
-
-            function closeList() {
-                newSelectList.fadeOut();
-            }
-
-            function clickOption() {
-                var $this = $(this);
-                var currentValue = $this.data('value');
-                if ($this.is('.' + disabledOptionClass)) return false;
-                if ($this.is('.' + selectedOptionClass) && !multiSelect) return false;
-
-                (multiSelect) ? multi() : single();
-
-                function multi() {
-                    if (selectValue.indexOf(currentValue) !== -1) {
-                        $this.removeClass(selectedOptionClass);
-                        selectValue.splice(selectValue.indexOf(currentValue), 1);
-                    } else {
-                        $this.addClass(selectedOptionClass);
-                        selectValue.push(currentValue);
-                    }
-                    newSelectCurrent
-                        .find('[data-name]')
-                        .text(selectValue.length + ' элемента');
-                    select.val(selectValue);
-                    watchArrow();
-                }
-
-                function single() {
-                    selectValue = currentValue;
-                    newSelectCurrent.find('[data-name]').text($this.text());
-                    select.val(selectValue);
-                    console.log(selectValue);
-                    newSelectOptions.removeClass(selectedOptionClass);
-                    $this.toggleClass(selectedOptionClass);
-                    closeList();
-                }
-            }
-
-            function clickCurrent() {
-                var $this = $(this);
-                var setPositions = function () {
-                    var positions = {
-                        left: $this.offset().left,
-                        top: $this.offset().top
-                    }
-                    newSelectList.css({
-                        position: 'absolute',
-                        top: positions.top,
-                        left: positions.left,
-                        width: newSelectCurrent.outerWidth()
-                    })
-                }
-                $('body').append(newSelectList);
-                setPositions();
-                if (!currentClickEvents) {
-                    $(window).on('resize', function () {
-                        setPositions();
-                    });
-                    currentClickEvents = true;
-                }
-                newSelectList.fadeIn();
-            }
-
-            function getPlaceholder() {
-                if (!multiSelect) {
-                    var placeholder = select.data('placeholder') || selectOptions.filter('[checked]').text() || selectOptions.eq(0).text();
-                } else {
-                    var placeholder = select.data('placeholder') || 'Выберите элемент';
-                }
-                return placeholder;
-            }
-
-            function watchArrow() {
-                if (multiSelect && selectValue.length > 0) {
-                    console.log('k')
-                    $('.' + prefix + '__arrow').addClass(prefix + '__arrow_remove');
-                } else {
-                    $('.' + prefix + '__arrow').removeClass(prefix + '__arrow_remove');
-                }
-            }
-        }
-
+        /*
+            Строит DOM по объекту 
+            content - содержимое узла
+            children - дети узла
+            className - Класс узла
+        */
         function buildTree(el, props) {
             var container = $('<div/>').addClass(props.container.className);
             go(props.container.children);
