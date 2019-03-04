@@ -39,6 +39,15 @@ $(function () {
     //init sliders
     (function(){
         var slidersProps = {
+            'reviews': {
+                props: {
+                    breakpoints: {
+                        575: {
+                            slidesPerView: 1
+                        }
+                    }
+                }
+            },
             'place': {
                 props: {
                     spaceBetween: 0,
@@ -52,20 +61,14 @@ $(function () {
             'special': {
                 props: {
                     breakpoints:{
+                        1220: {
+                            slidesPerView: 3
+                        },
                         991: {
                             slidesPerView: 2
     
                         }
                     }
-                },
-                callbacks: function(swiper){
-                    console.log('callbacks initialize')
-                    $(window).resize(function(){
-                        var ww = $(window).innerWidth();
-                        if(ww <= 991){
-                            swiper.destroy();
-                        }
-                    });
                 }
             },
             'thumbnails': {
@@ -74,8 +77,13 @@ $(function () {
                 }
             }
         };
+        
         $('[data-swiper-container]').each(function () {
-            var $this = $(this),
+            sliderInit(this);
+        });
+
+        function sliderInit(el){
+            var $this = $(el),
                 wrapper = $this.find('[data-swiper-wrapper]'),
                 slide = $this.find('[data-swiper-slide]'),
                 pagination = $this.find('[data-swiper-pagination]'),
@@ -103,16 +111,15 @@ $(function () {
                         disabledClass: 'disabled'
                     }
                 },
-                props = $.extend(defaultProps, sliderProps);
+                props = $.extend(defaultProps, sliderProps.props);
             if (slide.length > items) {
-                sliderInit();
+                init();
                 swiper = new Swiper($this, props);
                 if(sliderProps.hasOwnProperty('callbacks')) sliderProps.callbacks(swiper);
                 TABS_SLIDERS.push(swiper);
             }
             if ($this.closest('.slider-nav-wrapper').length || $this.is('[data-nav-container]')) {
                 var navWrapper = $this.closest('.slider-nav-wrapper') || $this.is('[data-nav-container]');
-                console.log(navWrapper[0])
                 $(navWrapper).find('.slider-nav').show();
                 $(navWrapper).find('[data-prev]').click(function () {
                     swiper.slidePrev();
@@ -122,7 +129,7 @@ $(function () {
                 })
             }
     
-            function sliderInit() {
+            function init() {
                 clearClassNames([
                     wrapper, slide
                 ]);
@@ -151,7 +158,7 @@ $(function () {
                     })
                 });
             }
-        });
+        }
     }());
     //init sliders
 
@@ -352,6 +359,85 @@ $(function () {
 });
 
 
+
+$(function(){
+    /*-- START: mobile nav --*/
+    var MOBILE_NAV = (function(){
+        var mobileNavClass = 'mobile-nav';
+        var menus = [
+            '.main-nav'
+        ];
+        var additionalBlocks = [];
+        var cnt = $('<div/>');
+  
+
+        for(var j=0; j<additionalBlocks.length;j++){
+            if($(additionalBlocks[j]).length){
+                var section = $('<div/>').addClass(mobileNavClass+'__section '+mobileNavClass+'__section_add'+j);
+                section.append($(additionalBlocks[j]).clone());
+            	cnt.append(section);
+            }
+        }
+
+        for(var i = 0; i<menus.length; i++){
+            if($(menus[i]).length){
+                var section = $('<div/>').addClass(mobileNavClass+'__section '+mobileNavClass+'__section_'+i);
+                section.append(getItems(menus[i]));
+            	cnt.append(section);
+            }
+        }
+
+
+        cnt.addClass(mobileNavClass);
+    
+        $('body').append(cnt);
+
+        $('.header-mobile-wrap').click(function(){
+            $('.'+mobileNavClass).toggleClass('active');
+            $(this).toggleClass('active');
+        });
+
+
+        function getItems(selector){
+            var clone = $(selector).clone();
+            return clearClasses(clone);
+        }
+
+        function clearClasses(element){
+            var depth = 0;
+            $(element).removeClass().addClass(mobileNavClass+'__list');
+            clear($(element).children());
+
+            function clear(childrens){
+                depth++;
+                $(childrens).removeClass();
+                $(childrens).each(function(){
+                    var $this = $(this);
+                    if($this.is(':empty')) $(this).remove();
+                    if($this.is('li')) $(this).addClass(mobileNavClass+'__item');
+                    if($this.is('a')) $(this).addClass(mobileNavClass+'__link');
+                    if($this.is('ul') && depth>0) {
+                        var dropdownBtn = $('<button/>').addClass(mobileNavClass+'__dropdown-toggler');
+                        var parentLi = $(this).closest('li');
+                        dropdownBtn.click(function(){
+                            $this.toggleClass('active');
+                        });
+                        parentLi.append(dropdownBtn);
+
+                        $(this).addClass(mobileNavClass+'__dropdown');
+                        $(parentLi).addClass(mobileNavClass+'__parent');
+                    };
+                });
+                if($(childrens).children().length) clear($(childrens).children());
+            }
+            return element;
+        }
+    }());
+    /*-- END: mobile nav --*/
+});
+
+
+
 //qliba
 (function () {
     $.fn.q = function (action, params) {
@@ -408,12 +494,17 @@ $(function () {
 
                 function getTarget(){
                     if(!params) return $(el);
-                    if($(el).closest(settings.closest).length){
-                        return $(el).closest(settings.closest).find(settings.target);
+                    var target = $(el).closest(settings.closest).find(settings.target);
+                    if(target.length){
+                        return $(target);
                     }else{
                         return $(settings.target);
                     }
+                    
                 }
+
+                console.log(getTarget())
+
 
                 el.click(function(){
                     $(this).toggleClass(settings.openedClass);

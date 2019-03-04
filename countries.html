@@ -21,6 +21,7 @@
       <header class="main-header">
         <div class="container">
           <div class="row main-header__row">
+            <div class="col-auto d-md-none"><a class="ico-link main-header__back" href="#"><i class="icm icm-circle-arrow-left"></i><span>ПОИСК ЯХТ</span></a></div>
             <div class="col-auto main-header__logo"><a class="header-logo" href="/"><img class="img-responsive" src="img/logo.png" alt="fairyseal"></a></div>
             <div class="col-auto main-header__nav">
               <nav class="main-nav"><a class="main-nav__item" href="#">Поиск яхт</a><a class="main-nav__item" href="#">Направления</a><a class="main-nav__item" href="#">Вопросы и ответы</a><a class="main-nav__item" href="#">Акции</a><a class="main-nav__item" href="#">Патнёры</a></nav>
@@ -29,15 +30,18 @@
               <div class="lang" data-toggler-container>
                 <div class="lang__cur" data-q="toggler" data-q-params="{&quot;condition&quot;:&quot;_active&quot;, &quot;target&quot;: &quot;.lang__list&quot;, &quot;blur&quot;: &quot;.lang&quot;}">
                   <div class="lang__ico"><img src="img/langs/ru.jpg" alt="Русский"></div>
-                  <div class="lang__name">Русский</div>
+                  <div class="lang__name" data-short="РУС">Русский</div>
                   <div class="lang__arr"></div>
                 </div>
                 <div class="lang__list"><a class="lang__add" href="/">
                     <div class="lang__ico"><img src="img/langs/ru.jpg" alt="English"></div>
-                    <div class="lang__name">English</div></a><a class="lang__add" href="/"> 
+                    <div class="lang__name" data-short="ENG">English</div></a><a class="lang__add" href="/"> 
                     <div class="lang__ico"><img src="img/langs/ru.jpg" alt="Deutsch"></div>
-                    <div class="lang__name">Deutsch</div></a></div>
+                    <div class="lang__name" data-short="DEU">Deutsch</div></a></div>
               </div>
+            </div>
+            <div class="col-auto ml-auto d-md-none">
+              <button class="mobile-nav-btn" data-q="toggler" data-q-params="{&quot;target&quot;:&quot;.mobile-nav&quot;, &quot;condition&quot;: &quot;_active&quot;, &quot;openedClass&quot;: &quot;active&quot;}"><span></span><span></span><span></span></button>
             </div>
           </div>
         </div>
@@ -68,54 +72,98 @@
       <div class="place-page-section map-background map-background_center">
         <div class="container gutters-30">
           <div class="row">
-            <div class="col-3 place-page-section__col"><a class="place-item" href="#">
+            <div class="col-6 col-lg-3 place-page-section__col"><a class="place-item" href="#">
                 <div class="place-item__image"><img src="img/place1.jpg" alt=""></div>
                 <div class="place-item__desc">
                   <div class="place-item__name">Яхтинг в <br> италии</div>
                   <div class="place-item__price">от 389 </div>
                 </div></a></div>
-            <div class="col-3 place-page-section__col"><a class="place-item" href="#">
+            <div class="col-6 col-lg-3 place-page-section__col"><a class="place-item" href="#">
                 <div class="place-item__image"><img src="img/place1.jpg" alt=""></div>
                 <div class="place-item__desc">
                   <div class="place-item__name">Яхтинг в <br> италии</div>
                   <div class="place-item__price">от 389 </div>
                 </div></a></div>
-            <div class="col-3 place-page-section__col"><a class="place-item" href="#">
+            <div class="col-6 col-lg-3 place-page-section__col"><a class="place-item" href="#">
                 <div class="place-item__image"><img src="img/place1.jpg" alt=""></div>
                 <div class="place-item__desc">
                   <div class="place-item__name">Яхтинг в <br> италии</div>
                   <div class="place-item__price">от 389 </div>
                 </div></a></div>
-            <div class="col-3 place-page-section__col"><a class="place-item" href="#">
+            <div class="col-6 col-lg-3 place-page-section__col"><a class="place-item" href="#">
                 <div class="place-item__image"><img src="img/place1.jpg" alt=""></div>
                 <div class="place-item__desc">
                   <div class="place-item__name">Яхтинг в <br> италии</div>
                   <div class="place-item__price">от 389 </div>
                 </div></a></div>
-            <div class="col-3 place-page-section__col"><a class="place-item" href="#">
+            <div class="col-6 col-lg-3 place-page-section__col"><a class="place-item" href="#">
                 <div class="place-item__image"><img src="img/place1.jpg" alt=""></div>
                 <div class="place-item__desc">
                   <div class="place-item__name">Яхтинг в <br> италии</div>
                   <div class="place-item__price">от 389 </div>
                 </div></a></div>
-            <div class="col-3 place-page-section__col"><a class="place-item" href="#">
+            <div class="col-6 col-lg-3 place-page-section__col"><a class="place-item" href="#">
                 <div class="place-item__image"><img src="img/place1.jpg" alt=""></div>
                 <div class="place-item__desc">
                   <div class="place-item__name">Яхтинг в <br> италии</div>
                   <div class="place-item__price">от 389 </div>
                 </div></a></div>
-            <div class="col-3 place-page-section__col"><a class="place-item" href="#">
+            <div class="col-6 col-lg-3 place-page-section__col"><a class="place-item" href="#">
                 <div class="place-item__image"><img src="img/place1.jpg" alt=""></div>
                 <div class="place-item__desc">
                   <div class="place-item__name">Яхтинг в <br> италии</div>
                   <div class="place-item__price">от 389 </div>
                 </div></a></div>
-            <div class="col-3 place-page-section__col"><a class="place-item" href="#">
+            <div class="col-6 col-lg-3 place-page-section__col"><a class="place-item" href="#">
                 <div class="place-item__image"><img src="img/place1.jpg" alt=""></div>
                 <div class="place-item__desc">
                   <div class="place-item__name">Яхтинг в <br> италии</div>
                   <div class="place-item__price">от 389 </div>
                 </div></a></div>
+          </div>
+        </div>
+      </div>
+      <div class="feedback">
+        <div class="container">
+          <div class="feedback__inner">
+            <div class="row feedback__row">
+              <div class="col d-none d-md-block">
+                <div class="feedback__image"></div>
+              </div>
+              <div class="col">
+                <div class="feedback__content">
+                  <div class="feedback__header">Мы можем сами подобрать <br> вам лучшую яхту</div>
+                  <div class="feedback__text">После отправки запроса, мы свяжемся с Вами для уточнения желательных параметров и в кратчайшие сроки пришлем Вам самые выгодные предложения в соответствии с Вашим запросом</div>
+                  <div class="feedback__form">
+                    <form class="feedback-form" action="#">
+                      <div class="feedback-form__row">
+                        <div class="toggler">
+                          <label class="toggler__title" for="tel">Телефон</label>
+                          <div class="toggler__toggler">
+                            <label class="toggler__item">
+                              <input id="tel" type="radio" name="field-type" value="tel" checked><span data-responsive-text="Телефон">on</span>
+                            </label>
+                            <label class="toggler__item">
+                              <input id="mail" type="radio" name="field-type" value="email"><span data-responsive-text="Эл.почта">off</span>
+                            </label>
+                          </div>
+                          <label class="toggler__title" for="mail">эл.почта</label>
+                        </div>
+                      </div>
+                      <div class="feedback-form__row">
+                        <div class="input-btn">
+                          <input class="input input_default feedback__input" type="tel" placeholder="Email" data-tel>
+                          <input class="input input_default feedback__input" type="email" placeholder="Телефон" data-email><a class="btn btn_secondary" href="#">Отправить заявку</a>
+                        </div>
+                      </div>
+                      <div class="feedback-form__rule">
+                        <div class="form-rule">Заполняя форму вы соглашаетесь с <a href="#" class="link">Политикой Конфиденциальности</a></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -161,19 +209,25 @@
               <div class="col footer-subscribe__col">
                 <input class="input input_flat footer-subscribe__input" placeholder="Введите ваш e-mail" name="email" type="email">
               </div>
+              <div class="col footer-subscribe__col d-md-none">
+                <button class="d-md-none btn btn_primary footer-subscribe__btn">Отправить заявку</button>
+              </div>
             </form>
           </div>
         </div>
         <div class="main-footer__bottom">
           <div class="container-fluid footer-bottom">
             <div class="row footer-bottom__row">
-              <div class="col-auto footer-bottom__col d-none d-lg-block">
+              <div class="col-auto footer-bottom__col d-md-none d-lg-block">
                 <div class="footer-contacts">
                   <div class="footer-contacts__item"><a class="contact-item" href="#">
-                      <div class="contact-item__ico"><i class="icm icm-skype"></i></div>
+                      <div class="contact-item__ico" data-responsive-ico="Skype"><i class="icm icm-skype"></i></div>
                       <div class="contact-item__text">Fairysail</div></a></div>
+                  <div class="footer-contacts__item d-md-none"><a class="contact-item" href="#">
+                      <div class="contact-item__ico" data-responsive-ico="Тел."><i class="icm icm-phone"></i></div>
+                      <div class="contact-item__text">+7 495 661-43-71</div></a></div>
                   <div class="footer-contacts__item"><a class="contact-item" href="#">
-                      <div class="contact-item__ico"><i class="icm icm-envelope"></i></div>
+                      <div class="contact-item__ico" data-responsive-ico="E-mail"><i class="icm icm-envelope"></i></div>
                       <div class="contact-item__text">Fairysail@gmail.com</div></a></div>
                 </div>
               </div>
