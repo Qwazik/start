@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>start</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, max-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link href="libs/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="libs/swiper/dist/css/swiper.min.css" rel="stylesheet">
+    <link href="libs/air-datepicker/dist/css/datepicker.min.css" rel="stylesheet">
+    <link href="libs/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="fonts/icomoon/style.css" rel="stylesheet">
+    <link href="fonts/Yandex/stylesheet.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body><!--[if lt IE 10]>
+    <p class="browserupgrade">Ваш браузер  <strong>устарел</strong>. Пожалуйста <a href="http://browsehappy.com/">обновите ваш браузер</a> для корректного отображения сайтов.</p><![endif]-->
+    <div class="page" id="app">
+      <header class="main-header">
+        <div class="container">
+          <div class="row main-header__row">
+            <div class="col-auto d-md-none"><a class="ico-link main-header__back" href="#"><i class="icm icm-circle-arrow-left"></i><span>ПОИСК ЯХТ</span></a></div>
+            <div class="col-auto main-header__logo"><a class="header-logo" href="/"><img class="img-responsive" src="img/logo.png" alt="fairyseal"></a></div>
+            <div class="col-auto main-header__nav">
+              <nav class="main-nav"><a class="main-nav__item" href="#">Поиск яхт</a><a class="main-nav__item" href="#">Направления</a><a class="main-nav__item" href="#">Вопросы и ответы</a><a class="main-nav__item" href="#">Акции</a><a class="main-nav__item" href="#">Патнёры</a></nav>
+            </div>
+            <div class="col-auto main-header__lang">
+              <div class="lang" data-toggler-container>
+                <div class="lang__cur" data-q="toggler" data-q-params="{&quot;condition&quot;:&quot;_active&quot;, &quot;target&quot;: &quot;.lang__list&quot;, &quot;blur&quot;: &quot;.lang&quot;}">
+                  <div class="lang__ico"><img src="img/langs/ru.jpg" alt="Русский"></div>
+                  <div class="lang__name" data-short="РУС">Русский</div>
+                  <div class="lang__arr"></div>
+                </div>
+                <div class="lang__list"><a class="lang__add" href="/">
+                    <div class="lang__ico"><img src="img/langs/ru.jpg" alt="English"></div>
+                    <div class="lang__name" data-short="ENG">English</div></a><a class="lang__add" href="/"> 
+                    <div class="lang__ico"><img src="img/langs/ru.jpg" alt="Deutsch"></div>
+                    <div class="lang__name" data-short="DEU">Deutsch</div></a></div>
+              </div>
+            </div>
+            <div class="col-auto ml-auto d-md-none">
+              <button class="mobile-nav-btn" data-q="toggler" data-q-params="{&quot;target&quot;:&quot;.mobile-nav&quot;, &quot;condition&quot;: &quot;_active&quot;, &quot;openedClass&quot;: &quot;active&quot;}"><span></span><span></span><span></span></button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="inner-header d-none d-md-flex" style="background-image: url(img/partners_bg.jpg)">
+        <div class="container ta-right">
+          <div class="inner-header__wrapper">
+            <div class="inner-header__header">
+              <div class="h h_xl">СТРАНЫ</div>
+            </div>
+            <div class="inner-header__icons inner-header__icons_countries">
+              <div class="inner-header__icons-item">
+                <div class="ico-item"><span class="ico-item__ico"><i class="icm icm-file"></i></span><span class="ico-item__text">Язык</span></div>
+              </div>
+              <div class="inner-header__icons-item">
+                <div class="ico-item"><span class="ico-item__ico"><i class="icm icm-support"></i></span><span class="ico-item__text">Время</span></div>
+              </div>
+              <div class="inner-header__icons-item">
+                <div class="ico-item"><span class="ico-item__ico"><i class="icm icm-card"></i></span><span class="ico-item__text">Валюта</span></div>
+              </div>
+              <div class="inner-header__icons-item">
+                <div class="ico-item"><span class="ico-item__ico"><i class="icm icm-group"></i></span><span class="ico-item__text">Виза</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="place-page-section map-background map-background_center">
+        <div class="container">
+          <div class="partners-table mb-6">
+            <div class="partners-table__headers">
+              <div class="partners-table__header">ОПИСАНИЕ КОМПАНИИ</div>
+              <div class="partners-table__header">СКИДКА</div>
+            </div>
+            <div class="partner-item">
+              <div class="partner-item__col">
+                <div class="partner-item__first">
+                  <div class="partner-item__image"><img src="img/partner-image.jpg" alt=""></div>
+                  <div class="partner-item__content">
+                    <div class="partner-item__title">Туристическая компания "СКАЗОЧНЫЙ ОСТРОВ"</div>
+                    <div class="partner-item__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum  suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ut labore et dolore magna aliqua. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="partner-item__col">
+                <div class="partner-item__last">
+                  <div class="partner-item__discount">5%</div><a class="partner-item__link" href="#"><span data-responsive-text-1220="На сайт">На сайт компании</span><i class="icm icm-angle-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="partner-item">
+              <div class="partner-item__col">
+                <div class="partner-item__first">
+                  <div class="partner-item__image"><img src="img/partner-image.jpg" alt=""></div>
+                  <div class="partner-item__content">
+                    <div class="partner-item__title">Туристическая компания "СКАЗОЧНЫЙ ОСТРОВ"</div>
+                    <div class="partner-item__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum  suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ut labore et dolore magna aliqua. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="partner-item__col">
+                <div class="partner-item__last">
+                  <div class="partner-item__discount">5%</div><a class="partner-item__link" href="#"><span data-responsive-text-1220="На сайт">На сайт компании</span><i class="icm icm-angle-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="partner-item">
+              <div class="partner-item__col">
+                <div class="partner-item__first">
+                  <div class="partner-item__image"><img src="img/partner-image.jpg" alt=""></div>
+                  <div class="partner-item__content">
+                    <div class="partner-item__title">Туристическая компания "СКАЗОЧНЫЙ ОСТРОВ"</div>
+                    <div class="partner-item__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum  suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ut labore et dolore magna aliqua. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="partner-item__col">
+                <div class="partner-item__last">
+                  <div class="partner-item__discount">5%</div><a class="partner-item__link" href="#"><span data-responsive-text-1220="На сайт">На сайт компании</span><i class="icm icm-angle-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="partner-item">
+              <div class="partner-item__col">
+                <div class="partner-item__first">
+                  <div class="partner-item__image"><img src="img/partner-image.jpg" alt=""></div>
+                  <div class="partner-item__content">
+                    <div class="partner-item__title">Туристическая компания "СКАЗОЧНЫЙ ОСТРОВ"</div>
+                    <div class="partner-item__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum  suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ut labore et dolore magna aliqua. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="partner-item__col">
+                <div class="partner-item__last">
+                  <div class="partner-item__discount">5%</div><a class="partner-item__link" href="#"><span data-responsive-text-1220="На сайт">На сайт компании</span><i class="icm icm-angle-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="partner-item">
+              <div class="partner-item__col">
+                <div class="partner-item__first">
+                  <div class="partner-item__image"><img src="img/partner-image.jpg" alt=""></div>
+                  <div class="partner-item__content">
+                    <div class="partner-item__title">Туристическая компания "СКАЗОЧНЫЙ ОСТРОВ"</div>
+                    <div class="partner-item__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum  suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt  ut labore et dolore magna aliqua. </div>
+                  </div>
+                </div>
+              </div>
+              <div class="partner-item__col">
+                <div class="partner-item__last">
+                  <div class="partner-item__discount">5%</div><a class="partner-item__link" href="#"><span data-responsive-text-1220="На сайт">На сайт компании</span><i class="icm icm-angle-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="main-footer">
+        <div class="main-footer__nav">
+          <div class="container">
+            <nav class="footer-nav"><a class="footer-nav__item" href="#">Поиск яхт</a><a class="footer-nav__item" href="#">Направления</a><a class="footer-nav__item" href="#">Вопросы и ответы</a><a class="footer-nav__item" href="#">Акции</a><a class="footer-nav__item" href="#">Патнёры</a><a class="footer-nav__item" href="#">Виды яхт</a></nav>
+          </div>
+        </div>
+        <div class="main-footer__category">
+          <div class="container">
+            <div class="footer-category">
+              <div class="footer-category__header">Выберите популярное направление</div>
+              <div class="footer-category__nav">
+                <nav class="category-nav">
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Греция</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Греция</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Италия</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Италия</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Маршалловы острова</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Маршалловы острова</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Маршалловы острова</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Маршалловы острова</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Греция</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Италия</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Греция</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Италия</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Маршалловы острова</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Маршалловы острова</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Маршалловы острова</a></div>
+                  <div class="category-nav__col"><a class="category-nav__link" href="#">Маршалловы острова</a></div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main-footer__subscribe">
+          <div class="container-fluid footer-subscribe">
+            <form class="footer-subscribe__row row" action="#">
+              <div class="col footer-subscribe__col"> 
+                <div class="footer-subscribe__text">Получайте скидки и акции на почту</div>
+              </div>
+              <div class="col footer-subscribe__col">
+                <input class="input input_flat footer-subscribe__input" placeholder="Введите ваш e-mail" name="email" type="email">
+              </div>
+              <div class="col footer-subscribe__col d-md-none">
+                <button class="d-md-none btn btn_primary footer-subscribe__btn">Отправить заявку</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="main-footer__bottom">
+          <div class="container-fluid footer-bottom">
+            <div class="row footer-bottom__row">
+              <div class="col-auto footer-bottom__col d-md-none d-lg-block">
+                <div class="footer-contacts">
+                  <div class="footer-contacts__item"><a class="contact-item" href="#">
+                      <div class="contact-item__ico" data-responsive-ico="Skype"><i class="icm icm-skype"></i></div>
+                      <div class="contact-item__text">Fairysail</div></a></div>
+                  <div class="footer-contacts__item d-md-none"><a class="contact-item" href="#">
+                      <div class="contact-item__ico" data-responsive-ico="Тел."><i class="icm icm-phone"></i></div>
+                      <div class="contact-item__text">+7 495 661-43-71</div></a></div>
+                  <div class="footer-contacts__item"><a class="contact-item" href="#">
+                      <div class="contact-item__ico" data-responsive-ico="E-mail"><i class="icm icm-envelope"></i></div>
+                      <div class="contact-item__text">Fairysail@gmail.com</div></a></div>
+                </div>
+              </div>
+              <div class="col-auto footer-bottom__col">
+                <ul class="social">
+                  <li class="social__item"><a class="social__link" href="#"><i class="icm icm-insta"></i></a></li>
+                  <li class="social__item"><a class="social__link" href="#"><i class="icm icm-fb"></i></a></li>
+                  <li class="social__item"><a class="social__link" href="#"><i class="icm icm-vk"></i></a></li>
+                </ul>
+              </div>
+              <div class="col-auto footer-bottom__col"><a class="conf" href="#">Политика конфиденциальности</a></div>
+              <div class="col-auto footer-bottom__col">
+                <div class="footer-copyright">2010-2018 <br> Яхтенная компания <br> “Сказочный парус”</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <div class="git-nav">
+        <label>
+          <input type="checkbox" checked><span class="git-nav__button">Показать Меню</span>
+          <div class="git-nav__inner"><a class="git-nav__item" href="index.html">Главная</a><a class="git-nav__item" href="card.html">Карточка яхты</a><a class="git-nav__item" href="catalog.html">Каталог</a><a class="git-nav__item" href="countries.html">Страны</a><a class="git-nav__item" href="italy.html">Страна</a><a class="git-nav__item" href="questions.html">Вопросы</a><a class="git-nav__item" href="team.html">О нас</a></div>
+        </label>
+      </div>
+    </div>
+    <!--scripts =================================================-->
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src="libs/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="libs/swiper/dist/js/swiper.min.js"></script>
+    <script src="libs/parsleyjs/dist/parsley.min.js"></script>
+    <script src="libs/parsleyjs/dist/i18n/ru.js"></script>
+    <script src="libs/parsleyjs/dist/i18n/ru.extra.js"></script>
+    <script src="libs/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
+    <script src="libs/air-datepicker/dist/js/datepicker.min.js"></script>
+    <script src="libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="js/custom.js"></script>
+  </body>
+</html>
