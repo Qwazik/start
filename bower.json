@@ -1,0 +1,21 @@
+{
+  "name": "kibteh",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Kovakin Alexey <qwazik21@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Qwazik/kibteh",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "build/libs/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}

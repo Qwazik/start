@@ -1,0 +1,27 @@
+@import "_settings/_variables";
+@import "_settings/_mixins";
+@import "_settings/_reset";
+@import "_settings/_bootstrap-grid";
+@import "_settings/_rewrite";
+
+html{
+  font-size: 62.5%;
+}
+
+body{
+  font-size: $core-fz;
+  font-family: $ff-primary;
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+}
+
+/* ========================
+START: COMPONENTS
+========================*/
+@import '../pug/blocks/header/header';
+@import '../pug/blocks/footer/footer';
+/*========================
+END: COMPONENTS
+========================*/
+
