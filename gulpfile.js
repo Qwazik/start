@@ -368,7 +368,7 @@ gulp.task('clean', function(callback){
 gulp.task('deploy', function() {
     return gulp.src('./build/**/*')
         .pipe(ghPages({
-        	branch: 'master',
+        	branch: 'gh-pages',
         	message: 'Update '+new Date().toLocaleString('en-GB')
         }));
 });
